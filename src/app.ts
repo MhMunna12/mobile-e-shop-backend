@@ -12,7 +12,7 @@ app.use(cors());
 
 // application routes
 app.use("/api/v1/product", productRoutes);
-app.use("/api/v1/order", orderRoutes);
+app.use("/api/v1/orders", orderRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");

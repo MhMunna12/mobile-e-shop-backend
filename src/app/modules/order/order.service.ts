@@ -4,7 +4,6 @@ import { Order } from "./order.model";
 
 const createOrderInToDB = async (order: TOrder) => {
   const { productId, quantity } = order;
-  console.log(productId, quantity);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const findProduct: any = await Product.findOne({ _id: productId });
   if (findProduct?.inventory.quantity <= quantity) {
@@ -20,6 +19,17 @@ const createOrderInToDB = async (order: TOrder) => {
   const result = await Order.create(order);
   return result;
 };
+const getAllOrderInToDB = async () => {
+  const result = await Order.find();
+  return result;
+};
+
+const getEmailByOrderDB = async (email: string): Promise<TOrder[] | null> => {
+  const result = await Order.find({ email });
+  return result;
+};
 export const OrderServices = {
   createOrderInToDB,
+  getAllOrderInToDB,
+  getEmailByOrderDB,
 };
