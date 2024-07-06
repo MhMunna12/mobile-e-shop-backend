@@ -44,8 +44,7 @@ const productSchema = new Schema<TProduct>({
     trim: true,
   },
   tags: {
-    type: String,
-    enum: ["smartphone", "Apple", "iOS"],
+    type: [String],
     required: true,
   },
   variants: {
