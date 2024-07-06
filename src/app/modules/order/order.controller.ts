@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
 import { OrderServices } from "./order.service";
+import { orderValidationSchema } from "./order.validation";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
     const { order } = req.body;
-    const result = await OrderServices.createOrderInToDB(order);
+    //zod validation
+    const zodParseData = orderValidationSchema.parse(order);
+    const result = await OrderServices.createOrderInToDB(zodParseData);
     res.status(200).json({
       success: true,
       message: "Order Created successfully",
@@ -42,7 +45,7 @@ const getEmailByOrder = async (req: Request, res: Response) => {
     );
     res.status(200).json({
       success: true,
-      message: "Orders fetched successfully!",
+      message: "Orders by email successfully!",
       data: orders,
     });
   } catch (error) {
