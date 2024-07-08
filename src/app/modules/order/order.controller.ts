@@ -23,7 +23,9 @@ const createOrder = async (req: Request, res: Response) => {
 };
 const getAllOrder = async (req: Request, res: Response) => {
   try {
-    const result = await OrderServices.getAllOrderInToDB();
+    const result = await OrderServices.getAllOrderInToDB(
+      req.query.email as string
+    );
     res.status(200).json({
       success: true,
       message: "Orders fetched successfully!",
@@ -38,26 +40,26 @@ const getAllOrder = async (req: Request, res: Response) => {
   }
 };
 
-const getEmailByOrder = async (req: Request, res: Response) => {
-  try {
-    const orders = await OrderServices.getEmailByOrderDB(
-      req.query.email as string
-    );
-    res.status(200).json({
-      success: true,
-      message: "Orders by email successfully!",
-      data: orders,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: true,
-      message: "Something went wrong",
-      error: error,
-    });
-  }
-};
+// const getEmailByOrder = async (req: Request, res: Response) => {
+//   try {
+//     const orders = await OrderServices.getEmailByOrderDB(
+//       req.query.email as string
+//     );
+//     res.status(200).json({
+//       success: true,
+//       message: "Orders by email successfully!",
+//       data: orders,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: true,
+//       message: "Something went wrong",
+//       error: error,
+//     });
+//   }
+// };
 export const orderController = {
   createOrder,
   getAllOrder,
-  getEmailByOrder,
+  // getEmailByOrder,
 };

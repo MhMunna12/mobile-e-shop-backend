@@ -19,17 +19,16 @@ const createOrderInToDB = async (order: TOrder) => {
   const result = await Order.create(order);
   return result;
 };
-const getAllOrderInToDB = async () => {
-  const result = await Order.find();
-  return result;
-};
-
-const getEmailByOrderDB = async (email: string): Promise<TOrder[] | null> => {
+const getAllOrderInToDB = async (email: string): Promise<TOrder[] | null> => {
   const result = await Order.find({ email });
   return result;
 };
+
+// const getEmailByOrderDB = async (email: string): Promise<TOrder[] | null> => {
+//   const result = await Order.find({ email });
+//   return result;
+// };
 export const OrderServices = {
   createOrderInToDB,
   getAllOrderInToDB,
-  getEmailByOrderDB,
 };
